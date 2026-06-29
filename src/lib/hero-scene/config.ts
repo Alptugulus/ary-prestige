@@ -9,7 +9,7 @@ import type { HeroSceneConfig } from "./types";
  * 3. `mode` → "glb"
  */
 export const heroSceneConfig: HeroSceneConfig = {
-  mode: "glb",
+  mode: "layers",
 
   parallax: {
     maxRotateX: 5,

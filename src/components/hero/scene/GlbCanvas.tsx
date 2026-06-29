@@ -26,7 +26,7 @@ function GlbModel({ url, onLoaded }: GlbModelProps) {
 
   return (
     <Center>
-      <primitive object={scene} scale={0.012} />
+      <primitive object={scene.clone()} scale={0.012} />
     </Center>
   );
 }
@@ -60,22 +60,24 @@ export function GlbCanvas({
       }}
     >
       <Canvas
-        camera={{ position: [4, 2.5, 6], fov: 42 }}
+        camera={{ position: [5, 3, 7], fov: 38 }}
         gl={{ antialias: true, alpha: true }}
-        dpr={[1, 1.5]}
+        dpr={[1, 2]}
         className="w-full h-full"
       >
         <color attach="background" args={["#0E0E0E"]} />
-        <ambientLight intensity={0.55} />
-        <directionalLight position={[8, 12, 6]} intensity={1.1} />
-        <directionalLight position={[-6, 4, -4]} intensity={0.35} />
+        <ambientLight intensity={0.65} />
+        <directionalLight position={[10, 14, 8]} intensity={1.3} />
+        <directionalLight position={[-8, 6, -6]} intensity={0.45} />
         <Suspense fallback={null}>
           <GlbModel url={url} onLoaded={onLoaded} />
-          <Environment preset="city" />
+          <Environment preset="sunset" />
         </Suspense>
       </Canvas>
     </motion.div>
   );
 }
 
-useGLTF.preload("/models/ary-prestige.glb");
+export function preloadGlb(url: string) {
+  useGLTF.preload(url);
+}

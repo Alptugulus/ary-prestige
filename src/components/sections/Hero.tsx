@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { HeroScene } from "@/components/hero/scene";
 import { useExplore } from "@/context/ExploreContext";
@@ -18,9 +19,13 @@ import { HeroScrollBridge } from "@/components/ui/ScrollReveal";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
-  const [currentSlide, setCurrentSlide] = useState(2);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [show3d, setShow3d] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { openExplore } = useExplore();
+
+  const activate3d = useCallback(() => setShow3d(true), []);
+  const close3d = useCallback(() => setShow3d(false), []);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -33,11 +38,12 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 0.5], ["0%", "-12%"]);
 
   useEffect(() => {
+    if (show3d) return;
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 7000);
     return () => clearInterval(interval);
-  }, []);
+  }, [show3d]);
 
   return (
     <>
@@ -51,6 +57,8 @@ export function Hero() {
           activeIndex={currentSlide}
           scrollScale={imageScale}
           scrollY={imageY}
+          show3d={show3d}
+          onClose3d={close3d}
         />
 
         <motion.div
@@ -115,13 +123,30 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* 360° + zaman modları */}
+        {/* 360° + 3D + zaman modları */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
           className="absolute right-5 md:right-10 top-1/2 -translate-y-1/2 z-10 hidden md:flex flex-col items-center gap-0.5 p-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full"
         >
+          <button
+            onClick={activate3d}
+            className={cn(
+              "w-9 h-9 flex items-center justify-center transition-colors duration-300 rounded-full",
+              show3d
+                ? "text-bronze bg-bronze/15"
+                : "text-white/50 hover:text-bronze"
+            )}
+            aria-label="3D Model"
+            title="3D Model"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
+              <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
+              <path d="M12 22V12M21 7L12 12M3 7L12 12" stroke="currentColor" strokeWidth="1.2" />
+            </svg>
+          </button>
+          <div className="w-5 h-px bg-white/15 my-0.5" />
           <button
             onClick={() => openExplore("360", currentSlide)}
             className="w-9 h-9 flex items-center justify-center text-white/50 hover:text-bronze transition-colors"
@@ -130,7 +155,8 @@ export function Hero() {
             <Icon360 />
           </button>
           <div className="w-5 h-px bg-white/15 my-0.5" />
-          {heroSlides.map((s, index) => (
+          {!show3d &&
+            heroSlides.map((s, index) => (
             <button
               key={s.id}
               onClick={() => setCurrentSlide(index)}
@@ -168,8 +194,8 @@ export function Hero() {
           <CompassIcon />
         </motion.div>
 
-        {/* Scroll + slayt numaraları */}
-        <div className="absolute bottom-[9.5rem] md:bottom-44 left-6 md:left-10 flex items-end gap-6 md:gap-10 z-10">
+        {/* Scroll + slayt önizlemeleri */}
+        <div className="absolute bottom-[9.5rem] md:bottom-44 left-6 md:left-10 flex items-end gap-5 md:gap-8 z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -182,38 +208,50 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4, duration: 0.8 }}
-            className="flex items-center gap-3 md:gap-4"
-          >
-            {heroSlides.map((s, index) => (
-              <button
-                key={s.id}
-                onClick={() => setCurrentSlide(index)}
-                className="group flex items-center gap-2"
-                aria-label={`Slayt ${index + 1}`}
-              >
-                <span
-                  className={cn(
-                    "font-sans text-xs md:text-sm font-medium transition-colors duration-300",
-                    index === currentSlide
-                      ? "text-bronze"
-                      : "text-white/25 group-hover:text-white/50"
-                  )}
+          {!show3d && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.4, duration: 0.8 }}
+              className="flex items-end gap-3 md:gap-4"
+            >
+              {heroSlides.map((s, index) => (
+                <button
+                  key={s.id}
+                  onClick={() => setCurrentSlide(index)}
+                  className="group flex flex-col items-start gap-1.5"
+                  aria-label={s.label}
                 >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                {index === currentSlide && (
-                  <motion.span
-                    layoutId="slide-indicator"
-                    className="hidden sm:block w-6 h-px bg-bronze"
-                  />
-                )}
-              </button>
-            ))}
-          </motion.div>
+                  <div
+                    className={cn(
+                      "relative w-20 sm:w-24 md:w-28 aspect-[16/10] overflow-hidden rounded-sm border transition-all duration-400",
+                      index === currentSlide
+                        ? "border-bronze ring-1 ring-bronze/40 opacity-100"
+                        : "border-white/15 opacity-50 group-hover:opacity-80 group-hover:border-white/30"
+                    )}
+                  >
+                    <Image
+                      src={s.image}
+                      alt={s.label}
+                      fill
+                      className="object-cover"
+                      sizes="112px"
+                    />
+                  </div>
+                  <span
+                    className={cn(
+                      "font-sans text-[9px] md:text-[10px] tracking-[0.14em] uppercase transition-colors duration-300",
+                      index === currentSlide
+                        ? "text-bronze"
+                        : "text-white/30 group-hover:text-white/55"
+                    )}
+                  >
+                    {s.label}
+                  </span>
+                </button>
+              ))}
+            </motion.div>
+          )}
         </div>
 
         {/* Özellik barı — ikon üstte, metin altta */}
