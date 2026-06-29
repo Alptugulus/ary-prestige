@@ -9,7 +9,7 @@ import type { HeroSceneConfig } from "./types";
  * 3. `mode` → "glb"
  */
 export const heroSceneConfig: HeroSceneConfig = {
-  mode: "layers",
+  mode: "glb",
 
   parallax: {
     maxRotateX: 5,
@@ -56,8 +56,8 @@ export const heroSceneConfig: HeroSceneConfig = {
 
   glb: {
     url: "/models/ary-prestige.glb",
-    enabled: false,
-    cameraPosition: [0, 1.2, 5.5],
+    enabled: true,
+    cameraPosition: [4, 2.5, 6],
     autoRotate: false,
   },
 };
