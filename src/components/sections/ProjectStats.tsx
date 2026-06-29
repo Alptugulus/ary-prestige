@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useExplore } from "@/context/ExploreContext";
+import { useModel3D } from "@/context/Model3DContext";
 import { projectStats, heroSlides } from "@/lib/data";
 import { formatNumber } from "@/lib/utils";
 import { PlayIcon, StatIcons } from "@/components/ui/Icons";
@@ -73,7 +73,7 @@ function StatCounter({
 }
 
 export function ProjectStats() {
-  const { openExplore } = useExplore();
+  const { openModel3D } = useModel3D();
 
   return (
     <section className="relative bg-secondary border-b border-white/5">
@@ -101,7 +101,7 @@ export function ProjectStats() {
           >
             <button
               type="button"
-              onClick={() => openExplore("3d", 0)}
+              onClick={openModel3D}
               className="group relative w-full h-full min-h-[160px] lg:min-h-full overflow-hidden"
               aria-label="Projeyi 3D Keşfet"
             >
