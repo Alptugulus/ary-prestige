@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-white antialiased font-sans;
+  }
+
+  ::selection {
+    @apply bg-bronze/30 text-white;
+  }
+}
+
+@layer components {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #e8c872 0%, #c5a059 45%, #a67c3d 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-3 px-8 py-3.5
+      text-background text-xs font-medium uppercase rounded-sm
+      hover:opacity-90 transition-all duration-300;
+    background: linear-gradient(135deg, #e8c872 0%, #c5a059 45%, #a67c3d 100%);
+    letter-spacing: 0.18em;
+    box-shadow: 0 4px 24px rgba(197, 160, 89, 0.25);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-3 px-8 py-3.5
+      border border-white/40 text-white text-xs font-medium uppercase
+      rounded-sm hover:border-bronze hover:text-bronze transition-all duration-300;
+    letter-spacing: 0.18em;
+  }
+
+  .tag-outline {
+    @apply inline-block px-4 py-1.5 border border-white/25 text-white/90
+      text-[10px] md:text-[11px] uppercase font-sans;
+    letter-spacing: 0.22em;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e0e0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5a05940;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #c5a05980;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #c5a05930;
+  border-radius: 2px;
+}
