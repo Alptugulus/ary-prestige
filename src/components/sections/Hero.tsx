@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroScene } from "@/components/hero/scene";
 import { useExplore } from "@/context/ExploreContext";
-import { useModel3D } from "@/context/Model3DContext";
 import { heroSlides, heroFeatures } from "@/lib/data";
 import {
   ArrowIcon,
@@ -22,8 +21,7 @@ import { cn } from "@/lib/utils";
 export function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const { openExplore } = useExplore();
-  const { openModel3D } = useModel3D();
+  const { openExperience } = useExplore();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -115,7 +113,7 @@ export function Hero() {
                 </Link>
                 <button
                   type="button"
-                  onClick={openModel3D}
+                  onClick={() => openExperience("3d")}
                   className="btn-ghost w-full sm:w-auto"
                 >
                   3D Modeli İncele
@@ -129,7 +127,7 @@ export function Hero() {
           </div>
         </motion.div>
 
-        {/* 360° + 3D + zaman modları */}
+        {/* 360° 3D + zaman modları */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -137,21 +135,10 @@ export function Hero() {
           className="absolute right-5 md:right-10 top-1/2 -translate-y-1/2 z-10 hidden md:flex flex-col items-center gap-0.5 p-1.5 bg-black/50 backdrop-blur-md border border-white/10 rounded-full"
         >
           <button
-            onClick={openModel3D}
-            className="w-9 h-9 flex items-center justify-center transition-colors duration-300 rounded-full text-white/50 hover:text-bronze"
-            aria-label="3D Model"
-            title="3D Model"
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden>
-              <path d="M12 2L21 7V17L12 22L3 17V7L12 2Z" stroke="currentColor" strokeWidth="1.2" strokeLinejoin="round" />
-              <path d="M12 22V12M21 7L12 12M3 7L12 12" stroke="currentColor" strokeWidth="1.2" />
-            </svg>
-          </button>
-          <div className="w-5 h-px bg-white/15 my-0.5" />
-          <button
-            onClick={() => openExplore("360", currentSlide)}
-            className="w-9 h-9 flex items-center justify-center text-white/50 hover:text-bronze transition-colors"
-            aria-label="360° Proje Turu"
+            onClick={() => openExperience("3d")}
+            className="w-10 h-10 flex items-center justify-center transition-colors duration-300 rounded-full text-bronze bg-bronze/15 ring-1 ring-bronze/30"
+            aria-label="360° 3D Model"
+            title="360° 3D Model"
           >
             <Icon360 />
           </button>
