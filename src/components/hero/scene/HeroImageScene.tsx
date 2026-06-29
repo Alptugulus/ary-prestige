@@ -11,12 +11,14 @@ import {
 import { heroSceneConfig } from "@/lib/hero-scene/config";
 import type { HeroSlide } from "@/lib/hero-scene/types";
 import { useHeroParallax } from "./useHeroParallax";
+import { cn } from "@/lib/utils";
 
 interface HeroImageSceneProps {
   slides: HeroSlide[];
   activeIndex: number;
   scrollScale?: MotionValue<number>;
   scrollY?: MotionValue<string>;
+  dimmed?: boolean;
 }
 
 export function HeroImageScene({
@@ -24,6 +26,7 @@ export function HeroImageScene({
   activeIndex,
   scrollScale,
   scrollY,
+  dimmed = false,
 }: HeroImageSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const { rotateX, rotateY, smoothX, smoothY } = useHeroParallax({
@@ -81,7 +84,14 @@ export function HeroImageScene({
         </AnimatePresence>
       </motion.div>
 
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/85 via-black/35 to-transparent" />
+      <div
+        className={cn(
+          "absolute inset-0 pointer-events-none bg-gradient-to-r transition-opacity duration-700",
+          dimmed
+            ? "from-black/70 via-black/20 to-transparent opacity-100"
+            : "from-black/85 via-black/35 to-transparent"
+        )}
+      />
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-background via-black/10 to-black/20" />
     </div>
   );

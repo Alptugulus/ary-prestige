@@ -62,8 +62,8 @@ export function Hero() {
         />
 
         <motion.div
-          style={{ opacity: contentOpacity, y: contentY }}
-          className="absolute inset-0 flex items-center pt-28 pb-52 md:pb-56 will-change-transform"
+          style={{ opacity: show3d ? 1 : contentOpacity, y: contentY }}
+          className="absolute inset-0 flex items-center pt-28 pb-52 md:pb-56 will-change-transform z-10"
         >
           <div className="container mx-auto px-6 lg:px-10">
             <div className="max-w-xl lg:max-w-2xl">

@@ -43,6 +43,8 @@ export function HeroScene({
 
       {show3d && glb.enabled && (
         <GlbHeroScene
+          slides={slides}
+          activeIndex={activeIndex}
           glbConfig={glb}
           scrollScale={scrollScale}
           scrollY={scrollY}
