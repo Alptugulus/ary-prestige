@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import { useModel3D } from "@/context/Model3DContext";
-import { projectStats, heroSlides } from "@/lib/data";
+import { projectStats, heroSlides, siteConfig } from "@/lib/data";
 import { formatNumber } from "@/lib/utils";
 import { PlayIcon, StatIcons } from "@/components/ui/Icons";
 
@@ -108,7 +108,7 @@ export function ProjectStats() {
               <div className="relative w-full h-full min-h-[160px] lg:min-h-[200px]">
                 <Image
                   src={heroSlides[2].image}
-                  alt="ARY Prestige 3D Keşfet"
+                  alt={`${siteConfig.name} 3D Keşfet`}
                   fill
                   className="object-cover opacity-50 group-hover:opacity-70 group-hover:scale-105 transition-all duration-700"
                   sizes="288px"

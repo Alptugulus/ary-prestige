@@ -8,6 +8,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { heroSceneConfig } from "@/lib/hero-scene/config";
+import { siteConfig } from "@/lib/data";
 import type { HeroSlide } from "@/lib/hero-scene/types";
 import { useHeroParallax } from "./useHeroParallax";
 import { SceneLayer } from "./SceneLayer";
@@ -67,7 +68,7 @@ export function LayeredImageScene({
                 <SceneLayer
                   key={`${activeSlide.id}-${layer.id}`}
                   src={layer.src ?? activeSlide.image}
-                  alt={`ARY Prestige ${activeSlide.label} — ${layer.id}`}
+                  alt={`${siteConfig.name} ${activeSlide.label} — ${layer.id}`}
                   layer={layer}
                   smoothX={smoothX}
                   smoothY={smoothY}

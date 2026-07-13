@@ -6,6 +6,8 @@ import { siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
 
+type Status = "idle" | "loading" | "success" | "error";
+
 export function ContactSection() {
   const [formState, setFormState] = useState({
     name: "",
@@ -13,13 +15,38 @@ export function ContactSection() {
     email: "",
     message: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 4000);
-    setFormState({ name: "", phone: "", email: "", message: "" });
+    if (status === "loading") return;
+
+    setStatus("loading");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        setErrorMessage(data.error || "Gönderilemedi. Lütfen tekrar deneyin.");
+        return;
+      }
+
+      setStatus("success");
+      setFormState({ name: "", phone: "", email: "", message: "" });
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch {
+      setStatus("error");
+      setErrorMessage("Bağlantı hatası. Lütfen tekrar deneyin.");
+    }
   };
 
   const handleChange = (
@@ -34,7 +61,7 @@ export function ContactSection() {
         <SectionHeader
           subtitle="İletişim"
           title="Bilgi Talep Edin"
-          description="ARY Prestige hakkında detaylı bilgi almak ve size özel ödeme planı oluşturmak için formu doldurun."
+          description={`${siteConfig.name} hakkında detaylı bilgi almak ve size özel ödeme planı oluşturmak için formu doldurun.`}
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -121,12 +148,36 @@ export function ContactSection() {
               />
             </div>
 
+            {(status === "error" || status === "success") && (
+              <p
+                className={
+                  status === "success"
+                    ? "text-bronze text-sm"
+                    : "text-red-400 text-sm"
+                }
+                role="status"
+              >
+                {status === "success"
+                  ? "Talebiniz alındı. En kısa sürede dönüş yapacağız."
+                  : errorMessage}
+              </p>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button type="submit" size="lg" className="flex-1 sm:flex-none">
-                {isSubmitted ? "Gönderildi ✓" : "Gönder"}
+              <Button
+                type="submit"
+                size="lg"
+                className="flex-1 sm:flex-none"
+                disabled={status === "loading"}
+              >
+                {status === "loading"
+                  ? "Gönderiliyor..."
+                  : status === "success"
+                    ? "Gönderildi ✓"
+                    : "Gönder"}
               </Button>
               <a
-                href={`https://wa.me/${siteConfig.whatsapp}?text=Merhaba, ARY Prestige hakkında bilgi almak istiyorum.`}
+                href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(`Merhaba, ${siteConfig.name} hakkında bilgi almak istiyorum.`)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-green-600/40 text-green-500 hover:bg-green-600/10 text-xs md:text-sm tracking-wider uppercase transition-all duration-500"
@@ -148,14 +199,17 @@ export function ContactSection() {
           >
             <div className="aspect-video bg-secondary border border-white/5 overflow-hidden relative">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.0!2d32.7!3d39.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMznCsDUyJzQ4LjAiTiAzMsKwNDInMDAuMCJF!5e0!3m2!1str!2str!4v1"
+                src={`https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address)}&output=embed`}
                 width="100%"
                 height="100%"
-                style={{ border: 0, filter: "grayscale(100%) invert(92%) contrast(83%)" }}
+                style={{
+                  border: 0,
+                  filter: "grayscale(100%) invert(92%) contrast(83%)",
+                }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="ARY Prestige Konum"
+                title={`${siteConfig.name} Konum`}
                 className="absolute inset-0"
               />
             </div>
@@ -171,7 +225,23 @@ export function ContactSection() {
                 <h4 className="text-bronze text-xs tracking-[0.2em] uppercase mb-3">
                   Telefon
                 </h4>
-                <p className="text-silver/70 text-sm">{siteConfig.phone}</p>
+                <a
+                  href={`tel:${siteConfig.phoneRaw}`}
+                  className="text-silver/70 hover:text-white text-sm transition-colors"
+                >
+                  {siteConfig.phone}
+                </a>
+              </div>
+              <div className="p-6 bg-secondary/50 border border-white/5 sm:col-span-2">
+                <h4 className="text-bronze text-xs tracking-[0.2em] uppercase mb-3">
+                  E-posta
+                </h4>
+                <a
+                  href={`mailto:${siteConfig.contactEmail}`}
+                  className="text-silver/70 hover:text-white text-sm transition-colors"
+                >
+                  {siteConfig.contactEmail}
+                </a>
               </div>
             </div>
           </motion.div>

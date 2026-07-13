@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { socialAmenities } from "@/lib/data";
+import { socialAmenities, siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 const iconPaths: Record<string, React.ReactNode> = {
@@ -102,7 +102,7 @@ export function SocialLifeSection() {
         <SectionHeader
           subtitle="Sosyal Yaşam"
           title="Ayrıcalıklı Yaşam Alanları"
-          description="Fitness merkezinden tenis kortuna, açık havuzdan peyzaj alanlarına — ARY Prestige sakinleri için tasarlanmış kapsamlı sosyal tesisler."
+          description={`Fitness merkezinden tenis kortuna, açık havuzdan peyzaj alanlarına — ${siteConfig.name} sakinleri için tasarlanmış kapsamlı sosyal tesisler.`}
         />
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">

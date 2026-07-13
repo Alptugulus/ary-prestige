@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/data";
 export function WhatsAppButton() {
   return (
     <motion.a
-      href={`https://wa.me/${siteConfig.whatsapp}?text=Merhaba, ARY Prestige hakkında bilgi almak istiyorum.`}
+      href={`https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(`Merhaba, ${siteConfig.name} hakkında bilgi almak istiyorum.`)}`}
       target="_blank"
       rel="noopener noreferrer"
       initial={{ scale: 0, opacity: 0 }}

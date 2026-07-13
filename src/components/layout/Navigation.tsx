@@ -55,8 +55,8 @@ export function Navigation() {
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
           isScrolled
-            ? "bg-background/95 backdrop-blur-md border-b border-white/5 py-2.5"
-            : "bg-gradient-to-b from-background/85 to-transparent py-4 lg:py-5"
+            ? "bg-background/95 backdrop-blur-md border-b border-white/5 py-2"
+            : "bg-gradient-to-b from-background/85 to-transparent py-3 lg:py-4"
         )}
       >
         <div className="mx-auto max-w-[1600px] px-5 sm:px-6 lg:px-8 xl:px-10">
@@ -177,7 +177,7 @@ export function Footer() {
               <Logo />
             </div>
             <p className="text-silver/60 text-sm leading-relaxed max-w-xs mt-4">
-              Ankara Yenibağlıca&apos;da yükselen prestijli yaşam projesi.
+              Bağlıca&apos;da yükselen {siteConfig.name}.{" "}
               {siteConfig.company} güvencesiyle.
             </p>
           </div>
@@ -217,7 +217,7 @@ export function Footer() {
             saklıdır.
           </p>
           <p className="text-silver/40 text-xs tracking-wider">
-            {siteConfig.name} — Ankara&apos;nın Yeni Prestij Noktası
+            {siteConfig.name} — {siteConfig.slogan}
           </p>
         </div>
       </div>

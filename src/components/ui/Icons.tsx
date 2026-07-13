@@ -1,3 +1,6 @@
+import Image from "next/image";
+import { siteConfig } from "@/lib/data";
+
 export function Logo({
   className = "",
   compact = false,
@@ -6,39 +9,19 @@ export function Logo({
   compact?: boolean;
 }) {
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
-      <svg
-        width={compact ? 28 : 32}
-        height={compact ? 28 : 32}
-        viewBox="0 0 36 36"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden
-        className="flex-shrink-0"
-      >
-        <path
-          d="M18 4L32 30H4L18 4Z"
-          stroke="#C5A059"
-          strokeWidth="1.2"
-          fill="none"
-        />
-        <path d="M11 24H25" stroke="#C5A059" strokeWidth="1.2" />
-        <path d="M14 18H22" stroke="#C5A059" strokeWidth="1.2" />
-      </svg>
-      <div className="flex flex-col leading-none">
-        <span className="font-sans text-[8px] lg:text-[9px] tracking-[0.26em] uppercase text-white/45 font-medium whitespace-nowrap">
-          ARY Grup
-        </span>
-        <span
-          className={`font-display text-gold-gradient font-medium uppercase whitespace-nowrap ${
-            compact
-              ? "text-sm tracking-[0.12em] mt-0.5"
-              : "text-base md:text-lg tracking-[0.14em] mt-1"
-          }`}
-        >
-          ARY Prestige
-        </span>
-      </div>
+    <div className={`flex items-center ${className}`}>
+      <Image
+        src={siteConfig.logoLight}
+        alt={`${siteConfig.name} by ${siteConfig.company}`}
+        width={compact ? 132 : 168}
+        height={compact ? 142 : 180}
+        className={
+          compact
+            ? "h-10 w-auto sm:h-11 object-contain"
+            : "h-14 w-auto md:h-16 object-contain"
+        }
+        priority
+      />
     </div>
   );
 }
@@ -94,7 +77,7 @@ export function ScrollMouseIcon() {
         width="18"
         height="30"
         rx="9"
-        stroke="#B88A5A"
+        stroke="#C5A059"
         strokeWidth="1.2"
       />
       <circle cx="10" cy="10" r="2" fill="#C5A059">
@@ -118,26 +101,26 @@ export function ScrollMouseIcon() {
 export function CompassIcon() {
   return (
     <svg width="80" height="80" viewBox="0 0 80 80" fill="none" aria-hidden>
-      <circle cx="40" cy="40" r="38" stroke="#B88A5A" strokeWidth="0.5" opacity="0.4" />
-      <circle cx="40" cy="40" r="28" stroke="#B88A5A" strokeWidth="0.5" opacity="0.3" />
-      <line x1="40" y1="6" x2="40" y2="14" stroke="#B88A5A" strokeWidth="0.8" />
-      <line x1="40" y1="66" x2="40" y2="74" stroke="#B88A5A" strokeWidth="0.8" />
-      <line x1="6" y1="40" x2="14" y2="40" stroke="#B88A5A" strokeWidth="0.8" />
-      <line x1="66" y1="40" x2="74" y2="40" stroke="#B88A5A" strokeWidth="0.8" />
-      <text x="40" y="22" textAnchor="middle" fill="#B88A5A" fontSize="8" opacity="0.7">
+      <circle cx="40" cy="40" r="38" stroke="#C5A059" strokeWidth="0.5" opacity="0.4" />
+      <circle cx="40" cy="40" r="28" stroke="#C5A059" strokeWidth="0.5" opacity="0.3" />
+      <line x1="40" y1="6" x2="40" y2="14" stroke="#C5A059" strokeWidth="0.8" />
+      <line x1="40" y1="66" x2="40" y2="74" stroke="#C5A059" strokeWidth="0.8" />
+      <line x1="6" y1="40" x2="14" y2="40" stroke="#C5A059" strokeWidth="0.8" />
+      <line x1="66" y1="40" x2="74" y2="40" stroke="#C5A059" strokeWidth="0.8" />
+      <text x="40" y="22" textAnchor="middle" fill="#C5A059" fontSize="8" opacity="0.7">
         K
       </text>
-      <text x="40" y="68" textAnchor="middle" fill="#B88A5A" fontSize="8" opacity="0.5">
+      <text x="40" y="68" textAnchor="middle" fill="#C5A059" fontSize="8" opacity="0.5">
         G
       </text>
-      <text x="22" y="43" textAnchor="middle" fill="#B88A5A" fontSize="8" opacity="0.5">
+      <text x="22" y="43" textAnchor="middle" fill="#C5A059" fontSize="8" opacity="0.5">
         B
       </text>
-      <text x="58" y="43" textAnchor="middle" fill="#B88A5A" fontSize="8" opacity="0.5">
+      <text x="58" y="43" textAnchor="middle" fill="#C5A059" fontSize="8" opacity="0.5">
         D
       </text>
-      <polygon points="40,18 36,40 40,36 44,40" fill="#B88A5A" opacity="0.8" />
-      <polygon points="40,62 36,40 40,44 44,40" fill="#B88A5A" opacity="0.3" />
+      <polygon points="40,18 36,40 40,36 44,40" fill="#C5A059" opacity="0.8" />
+      <polygon points="40,62 36,40 40,44 44,40" fill="#C5A059" opacity="0.3" />
     </svg>
   );
 }

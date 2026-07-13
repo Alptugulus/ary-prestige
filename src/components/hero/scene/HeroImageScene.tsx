@@ -9,6 +9,7 @@ import {
   type MotionValue,
 } from "framer-motion";
 import { heroSceneConfig } from "@/lib/hero-scene/config";
+import { siteConfig } from "@/lib/data";
 import type { HeroSlide } from "@/lib/hero-scene/types";
 import { useHeroParallax } from "./useHeroParallax";
 import { cn } from "@/lib/utils";
@@ -69,7 +70,7 @@ export function HeroImageScene({
               >
                 <Image
                   src={activeSlide.image}
-                  alt={`ARY Prestige — ${activeSlide.label}`}
+                  alt={`${siteConfig.name} — ${activeSlide.label}`}
                   fill
                   priority={activeIndex === 0}
                   quality={92}

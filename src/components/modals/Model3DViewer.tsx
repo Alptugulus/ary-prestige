@@ -12,6 +12,7 @@ import {
   type ExteriorCategory,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
+import { siteConfig } from "@/lib/data";
 import type * as THREE from "three";
 
 const Model3DCanvas = dynamic(
@@ -221,7 +222,7 @@ export function Model3DViewer() {
           <header className="relative z-30 flex-shrink-0 flex items-center justify-between px-4 md:px-8 py-4 border-b border-white/5 pointer-events-none">
             <div>
               <p className="text-bronze/70 text-[9px] tracking-[0.28em] uppercase mb-1">
-                ARY Grup · ARY Prestige
+                {siteConfig.company} · {siteConfig.name}
               </p>
               <h2 className="font-display text-xl md:text-2xl text-gold-gradient tracking-[0.06em] uppercase">
                 360° Proje Keşfi

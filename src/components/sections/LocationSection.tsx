@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { locationDistances } from "@/lib/data";
+import { locationDistances, siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function LocationSection() {
@@ -11,7 +11,7 @@ export function LocationSection() {
         <SectionHeader
           subtitle="Lokasyon"
           title="Şehrin Merkezine Yakın, Kalabalığa Uzak"
-          description="Yenibağlıca'nın stratejik konumunda, ulaşım ağlarına dakikalar mesafede, doğayla iç içe prestijli bir adres."
+          description="Bağlıca'nın stratejik konumunda, ulaşım ağlarına dakikalar mesafede, doğayla iç içe bir adres."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -65,7 +65,7 @@ export function LocationSection() {
                   </svg>
                 </div>
                 <h3 className="font-display text-2xl text-white font-light mb-2">
-                  Yenibağlıca
+                  Bağlıca
                 </h3>
                 <p className="text-silver/60 text-sm">Ankara</p>
               </div>
@@ -115,7 +115,7 @@ export function InvestmentSection() {
             <span className="text-bronze">Yarının Değeri</span>
           </h2>
           <p className="text-silver/70 text-base md:text-lg leading-relaxed font-light max-w-2xl mx-auto">
-            Yenibağlıca&apos;nın gelişen aksında yükselen ARY Prestige, yaşam
+            Bağlıca&apos;nın gelişen aksında yükselen {siteConfig.name}, yaşam
             kalitesi ve yatırım potansiyelini aynı projede buluşturuyor.
           </p>
 

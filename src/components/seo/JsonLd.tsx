@@ -5,15 +5,16 @@ export function JsonLd() {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: siteConfig.name,
-    description:
-      "185 m² net 4+1 lüks rezidans daireler, panoramik Ankara manzarası ve ayrıcalıklı sosyal yaşam konseptiyle Yenibağlıca'da yükselen prestijli konut projesi.",
-    url: "https://aryprestige.com",
+    description: `${siteConfig.name}, ${siteConfig.slogan}. Bağlıca'da 185 m² net 4+1 lüks rezidans daireler.`,
+    url: siteConfig.url,
     telephone: siteConfig.phone,
-    email: siteConfig.email,
+    email: siteConfig.contactEmail,
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Yenibağlıca",
-      addressRegion: "Ankara",
+      streetAddress: "1248. Sk 2F, Kapı No:17",
+      addressLocality: "Bağlıca",
+      addressRegion: "Etimesgut, Ankara",
+      postalCode: "06790",
       addressCountry: "TR",
     },
     parentOrganization: {
@@ -26,14 +27,16 @@ export function JsonLd() {
   const apartmentData = {
     "@context": "https://schema.org",
     "@type": "ApartmentComplex",
-    name: "ARY Prestige",
+    name: siteConfig.name,
     description:
-      "Ankara Yenibağlıca'da 185 m² net 4+1 lüks daireler, 16 katlı 3 blok, panoramik Ankara manzarası.",
+      "Ankara Bağlıca'da 185 m² net 4+1 lüks daireler, 16 katlı 3 blok, panoramik Ankara manzarası.",
     numberOfAccommodationUnits: "Multiple",
     address: {
       "@type": "PostalAddress",
-      addressLocality: "Yenibağlıca",
-      addressRegion: "Ankara",
+      streetAddress: "1248. Sk 2F, Kapı No:17",
+      addressLocality: "Bağlıca",
+      addressRegion: "Etimesgut, Ankara",
+      postalCode: "06790",
       addressCountry: "TR",
     },
     amenityFeature: [

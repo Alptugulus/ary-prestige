@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { HeroScene } from "@/components/hero/scene";
 import { useExplore } from "@/context/ExploreContext";
-import { heroSlides, heroFeatures } from "@/lib/data";
+import { heroSlides, heroFeatures, siteConfig } from "@/lib/data";
 import {
   ArrowIcon,
   CompassIcon,
@@ -65,25 +65,32 @@ export function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <span className="tag-outline">Ankara Yenibağlıca</span>
+                <span className="tag-outline">Bağlıca · Etimesgut · Ankara</span>
               </motion.div>
 
-              <motion.h1
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.35 }}
-                className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[4.75rem] xl:text-[5.25rem] text-gold-gradient font-medium tracking-[0.04em] leading-[1.05] mt-6 md:mt-8 mb-4 md:mb-5"
+                className="mt-6 md:mt-8 mb-4 md:mb-5"
               >
-                ARY PRESTIGE
-              </motion.h1>
+                <Image
+                  src={siteConfig.logoLight}
+                  alt={siteConfig.nameUpper}
+                  width={520}
+                  height={560}
+                  className="h-[4.5rem] sm:h-[5.5rem] md:h-[6.5rem] lg:h-[7.25rem] w-auto object-contain object-left drop-shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+                  priority
+                />
+              </motion.div>
 
               <motion.p
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="font-display text-xl md:text-2xl lg:text-[1.65rem] text-white font-normal tracking-wide mb-5 md:mb-6"
+                className="font-sans text-base md:text-lg lg:text-xl text-white/90 font-light tracking-[0.04em] mb-5 md:mb-6 italic"
               >
-                Ankara&apos;nın Yeni Prestij Noktası
+                {siteConfig.slogan}
               </motion.p>
 
               <motion.p
@@ -94,7 +101,7 @@ export function Hero() {
               >
                 185 m² net yaşam alanına sahip 4+1 rezidans daireler, panoramik
                 Ankara manzarası ve ayrıcalıklı sosyal yaşam konseptiyle
-                Yenibağlıca&apos;da yükseliyor.
+                Bağlıca&apos;da yükseliyor.
               </motion.p>
 
               <motion.div

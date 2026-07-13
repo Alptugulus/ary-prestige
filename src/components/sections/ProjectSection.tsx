@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { corporatePartners, projectFeatures } from "@/lib/data";
+import { corporatePartners, projectFeatures, siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 
 export function ProjectSection() {
@@ -11,7 +11,7 @@ export function ProjectSection() {
         <SectionHeader
           subtitle="Proje"
           title="Mimari Mükemmellik"
-          description="16 katlı 3 blok, 6 ticari villa ve panoramik Ankara manzaralı 4+1 rezidans dairelerden oluşan ARY Prestige, Yenibağlıca'nın en prestijli adresi olmaya aday."
+          description={`16 katlı 3 blok, 6 ticari villa ve panoramik Ankara manzaralı 4+1 rezidans dairelerden oluşan ${siteConfig.name}, Bağlıca'nın en seçkin adreslerinden biri olmaya aday.`}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
@@ -46,7 +46,7 @@ export function CorporateSection() {
         <SectionHeader
           subtitle="Kurumsal"
           title="Güçlü İş Ortaklıkları"
-          description="ARY Prestige, sektörün önde gelen firmalarının güç birliğiyle hayata geçirilmektedir."
+          description={`${siteConfig.name}, sektörün önde gelen firmalarının güç birliğiyle hayata geçirilmektedir.`}
         />
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">

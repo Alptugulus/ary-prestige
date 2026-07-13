@@ -21,38 +21,37 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://aryprestige.com"),
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "ARY Prestige | Ankara Yenibağlıca Lüks Konut Projesi",
-    template: "%s | ARY Prestige",
+    default: `${siteConfig.name} | Bağlıca Etimesgut Lüks Konut Projesi`,
+    template: `%s | ${siteConfig.name}`,
   },
-  description:
-    "185 m² net 4+1 lüks rezidans daireler, panoramik Ankara manzarası ve ayrıcalıklı sosyal yaşam konseptiyle Yenibağlıca'da yükselen ARY Prestige. Ankara'nın yeni prestij noktası.",
+  description: `185 m² net 4+1 lüks rezidans daireler, panoramik Ankara manzarası ve ayrıcalıklı sosyal yaşam konseptiyle Bağlıca'da yükselen ${siteConfig.name}. ${siteConfig.slogan}.`,
   keywords: seoKeywords,
   authors: [{ name: siteConfig.company }],
   creator: siteConfig.company,
   openGraph: {
     type: "website",
     locale: "tr_TR",
-    url: "https://aryprestige.com",
-    siteName: "ARY Prestige",
-    title: "ARY Prestige | Ankara'nın Yeni Prestij Noktası",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title: `${siteConfig.name} | ${siteConfig.slogan}`,
     description:
-      "185 m² net 4+1 lüks daireler, panoramik Ankara manzarası. Yenibağlıca'da prestijli yaşam.",
+      "185 m² net 4+1 lüks daireler, panoramik Ankara manzarası. Bağlıca'da kökleri doğada, geleceği şehirde yaşam.",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "ARY Prestige - Ankara Yenibağlıca",
+        url: siteConfig.logo,
+        width: 832,
+        height: 896,
+        alt: `${siteConfig.name} - Bağlıca Ankara`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ARY Prestige | Ankara'nın Yeni Prestij Noktası",
+    title: `${siteConfig.name} | ${siteConfig.slogan}`,
     description:
-      "185 m² net 4+1 lüks daireler, panoramik Ankara manzarası. Yenibağlıca'da prestijli yaşam.",
+      "185 m² net 4+1 lüks daireler, panoramik Ankara manzarası. Bağlıca'da kökleri doğada, geleceği şehirde yaşam.",
   },
   robots: {
     index: true,

@@ -7,6 +7,7 @@ import {
   exteriorViews,
   exteriorCategories,
   type ExteriorCategory,
+  siteConfig,
 } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { cn } from "@/lib/utils";
@@ -62,7 +63,7 @@ export function ExteriorViewsSection() {
           <SectionHeader
             subtitle="Dış Görünümler"
             title="Mimari Zarafet"
-            description="Proje render görselleriyle ARY Prestige'in çağdaş mimarisini ve sosyal yaşam alanlarını keşfedin."
+            description={`Proje render görselleriyle ${siteConfig.name}'nın çağdaş mimarisini ve sosyal yaşam alanlarını keşfedin.`}
           />
 
           {/* Category Tabs */}

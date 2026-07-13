@@ -1,12 +1,18 @@
 export const siteConfig = {
-  name: "ARY Prestige",
+  name: "Terra Bağlıca",
+  nameUpper: "TERRA BAĞLICA",
   company: "ARY Grup",
-  location: "Ankara Yenibağlıca",
-  phone: "0312 123 45 67",
-  phoneRaw: "+903121234567",
-  email: "info@aryprestige.com",
-  whatsapp: "903121234567",
-  address: "Yenibağlıca, Ankara",
+  slogan: "kökleri doğada, geleceği şehirde",
+  location: "Bağlıca, Etimesgut / Ankara",
+  url: "https://arygrup.com.tr",
+  phone: "+90 544 772 61 06",
+  phoneRaw: "+905447726106",
+  email: "serhatsoyyigit@arygrup.com.tr",
+  contactEmail: "serhatsoyyigit@arygrup.com.tr",
+  whatsapp: "905447726106",
+  address: "1248. Sk 2F, Bağlıca, 06790 Etimesgut/Ankara Kapı No:17",
+  logo: "/images/logo/terra-baglica.png",
+  logoLight: "/images/logo/terra-baglica-light.png",
 };
 
 export const navLinks = [
@@ -45,49 +51,49 @@ export const exteriorViews = [
   {
     id: "01",
     src: "/images/exterior/01-on-cephe.png",
-    alt: "ARY Prestige ön cephe görünümü",
+    alt: "Terra Bağlıca ön cephe görünümü",
     title: "Ön Cephe",
     category: "day" as const,
   },
   {
     id: "02",
     src: "/images/exterior/02-panorama.png",
-    alt: "ARY Prestige panoramik görünüm",
+    alt: "Terra Bağlıca panoramik görünüm",
     title: "Panoramik Görünüm",
     category: "day" as const,
   },
   {
     id: "03",
     src: "/images/exterior/03-gun-batimi.png",
-    alt: "ARY Prestige gün batımı perspektifi",
+    alt: "Terra Bağlıca gün batımı perspektifi",
     title: "Gün Batımı",
     category: "sunset" as const,
   },
   {
     id: "04",
     src: "/images/exterior/04-havuz-sosyal-alan.png",
-    alt: "ARY Prestige havuz ve sosyal alan",
+    alt: "Terra Bağlıca havuz ve sosyal alan",
     title: "Havuz ve Sosyal Alan",
     category: "day" as const,
   },
   {
     id: "05",
     src: "/images/exterior/05-otopark-oyun-alani.png",
-    alt: "ARY Prestige otopark ve oyun alanı",
+    alt: "Terra Bağlıca otopark ve oyun alanı",
     title: "Otopark ve Oyun Alanı",
     category: "day" as const,
   },
   {
     id: "06",
     src: "/images/exterior/06-giris-kapisi.png",
-    alt: "ARY Prestige giriş kapısı ve güvenlik",
+    alt: "Terra Bağlıca giriş kapısı ve güvenlik",
     title: "Giriş Kapısı",
     category: "day" as const,
   },
   {
     id: "07",
     src: "/images/exterior/07-acik-hava-spor.png",
-    alt: "ARY Prestige açık hava spor ve oyun alanı",
+    alt: "Terra Bağlıca açık hava spor ve oyun alanı",
     title: "Açık Hava Spor Alanı",
     category: "day" as const,
   },
@@ -189,6 +195,103 @@ export const extraFeatures = [
   "Çamaşır odası (2.52 m²)",
   "Antre ve vestiyer (8.46 m²)",
   "Çocuk odalarında gömme dolap",
+];
+
+export type InteriorCategory = "all" | "living" | "kitchen" | "bath" | "entry";
+
+export const interiorCategories = [
+  { id: "all" as const, label: "Tümü" },
+  { id: "living" as const, label: "Salon" },
+  { id: "kitchen" as const, label: "Mutfak" },
+  { id: "bath" as const, label: "Banyo" },
+  { id: "entry" as const, label: "Antre" },
+];
+
+export const interiorViews = [
+  {
+    id: "int-01",
+    src: "/images/interior/01-salon.jpg",
+    alt: "Terra Bağlıca salon ve TV duvarı",
+    title: "Salon",
+    category: "living" as const,
+  },
+  {
+    id: "int-02",
+    src: "/images/interior/02-salon-yemek.jpg",
+    alt: "Terra Bağlıca yemek alanı ve salon",
+    title: "Yemek Alanı",
+    category: "living" as const,
+  },
+  {
+    id: "int-03",
+    src: "/images/interior/03-salon-genel.jpg",
+    alt: "Terra Bağlıca açık plan salon genel görünüm",
+    title: "Salon Genel",
+    category: "living" as const,
+  },
+  {
+    id: "int-08",
+    src: "/images/interior/08-salon-yemek-2.jpg",
+    alt: "Terra Bağlıca salon ve yemek odası",
+    title: "Salon & Yemek",
+    category: "living" as const,
+  },
+  {
+    id: "int-04",
+    src: "/images/interior/04-mutfak.jpg",
+    alt: "Terra Bağlıca modern mutfak adası",
+    title: "Mutfak Adası",
+    category: "kitchen" as const,
+  },
+  {
+    id: "int-05",
+    src: "/images/interior/05-mutfak-2.jpg",
+    alt: "Terra Bağlıca mutfak genel görünüm",
+    title: "Mutfak",
+    category: "kitchen" as const,
+  },
+  {
+    id: "int-06",
+    src: "/images/interior/06-mutfak-3.jpg",
+    alt: "Terra Bağlıca mutfak detay görünümü",
+    title: "Mutfak Detay",
+    category: "kitchen" as const,
+  },
+  {
+    id: "int-07",
+    src: "/images/interior/07-mutfak-4.jpg",
+    alt: "Terra Bağlıca mutfak doğal ışık görünümü",
+    title: "Mutfak Perspektif",
+    category: "kitchen" as const,
+  },
+  {
+    id: "int-10",
+    src: "/images/interior/10-banyo.jpg",
+    alt: "Terra Bağlıca modern banyo",
+    title: "Banyo",
+    category: "bath" as const,
+  },
+  {
+    id: "int-12",
+    src: "/images/interior/12-banyo-2.jpg",
+    alt: "Terra Bağlıca ebeveyn banyosu",
+    title: "Ebeveyn Banyosu",
+    category: "bath" as const,
+  },
+  {
+    id: "int-09",
+    src: "/images/interior/09-antre.jpg",
+    alt: "Terra Bağlıca daire girişi ve antre",
+    title: "Antre",
+    category: "entry" as const,
+  },
+  {
+    id: "int-11",
+    src: "/images/interior/11-koridor.jpg",
+    alt: "Terra Bağlıca koridor ve vestiyer",
+    title: "Koridor",
+    category: "entry" as const,
+  },
 ];
 
 export const floorPlanTypes = [
@@ -332,9 +435,11 @@ export const paymentPlans = [
 ];
 
 export const seoKeywords = [
+  "Terra Bağlıca",
+  "ARY Grup",
   "Ankara lüks konut",
   "Bağlıca konut projesi",
-  "Yenibağlıca daire",
+  "Etimesgut daire",
   "Ankara yatırım fırsatı",
   "4+1 lüks daire Ankara",
   "Panoramik Ankara manzaralı daire",
