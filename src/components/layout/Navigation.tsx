@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { navLinks, siteConfig } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -180,6 +181,13 @@ export function Footer() {
               Bağlıca&apos;da yükselen {siteConfig.name}.{" "}
               {siteConfig.company} güvencesiyle.
             </p>
+            <Image
+              src={siteConfig.companyLogo}
+              alt={siteConfig.company}
+              width={160}
+              height={140}
+              className="mt-6 h-14 w-auto object-contain opacity-90"
+            />
           </div>
 
           <div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { corporatePartners, projectFeatures, siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -63,7 +64,19 @@ export function CorporateSection() {
                 <div className="absolute inset-0 bg-gradient-to-br from-bronze/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
                 <div className="relative">
-                  <div className="w-12 h-px bg-bronze mb-8" />
+                  {"logo" in partner && partner.logo ? (
+                    <div className="mb-8 flex h-24 items-center">
+                      <Image
+                        src={partner.logo}
+                        alt={partner.name}
+                        width={220}
+                        height={194}
+                        className="h-20 w-auto max-w-[200px] object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-12 h-px bg-bronze mb-8" />
+                  )}
                   <h3 className="font-display text-2xl md:text-3xl text-white font-light mb-3">
                     {partner.name}
                   </h3>

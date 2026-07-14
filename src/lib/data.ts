@@ -13,6 +13,7 @@ export const siteConfig = {
   address: "1248. Sk 2F, Bağlıca, 06790 Etimesgut/Ankara Kapı No:17",
   logo: "/images/logo/terra-baglica.png",
   logoLight: "/images/logo/terra-baglica-light.png",
+  companyLogo: "/images/logo/ary-grup.jpg",
 };
 
 export const navLinks = [
@@ -150,6 +151,7 @@ export const corporatePartners = [
   {
     name: "ARY Grup",
     role: "Ana geliştirici",
+    logo: "/images/logo/ary-grup.jpg",
     description:
       "Ankara'nın seçkin projelerinde uzmanlaşmış, kalite ve güven odaklı inşaat geliştiricisi.",
   },

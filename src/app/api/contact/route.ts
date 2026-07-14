@@ -79,6 +79,8 @@ function buildHtmlBody(input: ContactInput) {
     )
     .join("");
 
+  const companyLogoUrl = `${siteConfig.url}${siteConfig.companyLogo}`;
+
   return `<!DOCTYPE html>
 <html lang="tr">
   <body style="margin:0;padding:0;background:#f4f1ea;">
@@ -88,9 +90,13 @@ function buildHtmlBody(input: ContactInput) {
           <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #e4ddd2;">
             <tr>
               <td style="padding:28px 32px 20px;border-bottom:3px solid #C5A059;">
-                <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C5A059;font-family:Arial,Helvetica,sans-serif;">
-                  ARY Grup
-                </p>
+                <img
+                  src="${companyLogoUrl}"
+                  alt="${escapeHtml(siteConfig.company)}"
+                  width="120"
+                  height="106"
+                  style="display:block;width:120px;height:auto;margin:0 0 18px;"
+                />
                 <h1 style="margin:0;font-size:28px;line-height:1.2;color:#1c1916;font-weight:normal;font-family:Georgia,'Times New Roman',serif;">
                   ${escapeHtml(siteConfig.name)}
                 </h1>
