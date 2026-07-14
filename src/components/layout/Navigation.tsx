@@ -212,7 +212,14 @@ export function Footer() {
               İletişim
             </h4>
             <div className="space-y-3 text-silver/60 text-sm">
-              <p>{siteConfig.address}</p>
+              <a
+                href={siteConfig.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block hover:text-white transition-colors"
+              >
+                {siteConfig.address}
+              </a>
               <p>{siteConfig.phone}</p>
               <p>{siteConfig.email}</p>
             </div>

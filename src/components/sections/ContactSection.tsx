@@ -199,7 +199,7 @@ export function ContactSection() {
           >
             <div className="aspect-video bg-secondary border border-white/5 overflow-hidden relative">
               <iframe
-                src={`https://www.google.com/maps?q=${encodeURIComponent(siteConfig.address)}&output=embed`}
+                src={siteConfig.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{
@@ -212,6 +212,13 @@ export function ContactSection() {
                 title={`${siteConfig.name} Konum`}
                 className="absolute inset-0"
               />
+              <a
+                href={siteConfig.mapUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute inset-0 z-10"
+                aria-label="Google Maps'te aç"
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -219,7 +226,14 @@ export function ContactSection() {
                 <h4 className="text-bronze text-xs tracking-[0.2em] uppercase mb-3">
                   Adres
                 </h4>
-                <p className="text-silver/70 text-sm">{siteConfig.address}</p>
+                <a
+                  href={siteConfig.mapUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-silver/70 hover:text-white text-sm transition-colors underline-offset-4 hover:underline"
+                >
+                  {siteConfig.address}
+                </a>
               </div>
               <div className="p-6 bg-secondary/50 border border-white/5">
                 <h4 className="text-bronze text-xs tracking-[0.2em] uppercase mb-3">
