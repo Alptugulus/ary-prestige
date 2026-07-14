@@ -197,34 +197,84 @@ export function ContactSection() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div className="aspect-video bg-secondary border border-white/5 overflow-hidden relative">
+            <div className="group relative aspect-video overflow-hidden border border-bronze/30 bg-[#12100e]">
               <iframe
                 src={siteConfig.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{
                   border: 0,
-                  filter: "grayscale(100%) invert(92%) contrast(83%)",
+                  filter:
+                    "sepia(0.35) saturate(1.2) hue-rotate(-12deg) brightness(0.88) contrast(1.08)",
                 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 title={`${siteConfig.name} Konum`}
-                className="absolute inset-0"
+                className="absolute inset-0 scale-[1.03] transition-transform duration-700 group-hover:scale-[1.06]"
               />
+
+              {/* Warm ARY wash */}
+              <div
+                className="pointer-events-none absolute inset-0 z-[1]"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(197,160,89,0.22) 0%, transparent 42%, rgba(18,16,14,0.55) 100%)",
+                }}
+              />
+              <div className="pointer-events-none absolute inset-0 z-[2] bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(12,10,8,0.72)_100%)]" />
+
+              {/* Architectural gold corners */}
+              <div className="pointer-events-none absolute inset-0 z-[4]">
+                <span className="absolute left-4 top-4 h-10 w-10 border-l border-t border-bronze" />
+                <span className="absolute right-4 top-4 h-10 w-10 border-r border-t border-bronze" />
+                <span className="absolute bottom-16 left-4 h-10 w-10 border-l border-b border-bronze" />
+                <span className="absolute bottom-16 right-4 h-10 w-10 border-r border-b border-bronze" />
+              </div>
+
+              {/* Custom gold pin */}
+              <div className="pointer-events-none absolute left-1/2 top-[44%] z-[5] -translate-x-1/2 -translate-y-full">
+                <div className="relative flex flex-col items-center drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)]">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-bronze bg-gradient-to-b from-[#E8C872] to-[#A67C3D] shadow-[0_0_24px_rgba(197,160,89,0.45)]">
+                    <span className="font-display text-sm font-medium tracking-wide text-[#1c1916]">
+                      A
+                    </span>
+                  </div>
+                  <div className="h-4 w-px bg-gradient-to-b from-bronze to-transparent" />
+                  <div className="h-1.5 w-1.5 rounded-full bg-bronze/80" />
+                </div>
+              </div>
+
+              {/* Brand bar */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[6] border-t border-bronze/25 bg-gradient-to-t from-[#0d0b09] via-[#0d0b09]/95 to-transparent px-5 pb-4 pt-10">
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <p className="text-[10px] tracking-[0.22em] uppercase text-bronze">
+                      {siteConfig.company} · Satış Ofisi
+                    </p>
+                    <p className="mt-1 font-display text-lg text-white font-light">
+                      {siteConfig.addressLabel}
+                    </p>
+                  </div>
+                  <span className="mb-0.5 text-xs tracking-[0.16em] uppercase text-bronze transition-colors group-hover:text-[#E8C872]">
+                    Yol Tarifi →
+                  </span>
+                </div>
+              </div>
+
               <a
                 href={siteConfig.mapUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="absolute inset-0 z-10"
-                aria-label="Google Maps'te aç"
+                aria-label={`${siteConfig.addressLabel} — Google Maps'te yol tarifi al`}
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="p-6 bg-secondary/50 border border-white/5">
                 <h4 className="text-bronze text-xs tracking-[0.2em] uppercase mb-3">
-                  Adres
+                  {siteConfig.addressLabel}
                 </h4>
                 <a
                   href={siteConfig.mapUrl}

@@ -11,6 +11,7 @@ export const siteConfig = {
   contactEmail: "serhatsoyyigit@arygrup.com.tr",
   whatsapp: "905447726106",
   address: "1248. Sk 2F, Bağlıca, 06790 Etimesgut/Ankara Kapı No:17",
+  addressLabel: "Ofis Adresi",
   mapUrl: "https://maps.app.goo.gl/hLhJ1ns7SG3gRDSc7",
   mapEmbedUrl:
     "https://www.google.com/maps?q=39.8961229,32.655909&z=17&output=embed",

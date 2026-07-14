@@ -35,19 +35,16 @@ export function LocationSection() {
             ))}
           </div>
 
-          <motion.a
-            href={siteConfig.mapUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="relative aspect-square lg:aspect-[4/5] bg-secondary border border-white/5 overflow-hidden block group"
+            className="relative aspect-square lg:aspect-[4/5] bg-secondary border border-white/5 overflow-hidden"
           >
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="text-center p-8">
-                <div className="w-16 h-16 mx-auto mb-6 border border-bronze/40 rounded-full flex items-center justify-center group-hover:border-bronze/70 transition-colors">
+                <div className="w-16 h-16 mx-auto mb-6 border border-bronze/40 rounded-full flex items-center justify-center">
                   <svg
                     className="w-6 h-6 text-bronze"
                     fill="none"
@@ -70,10 +67,7 @@ export function LocationSection() {
                 <h3 className="font-display text-2xl text-white font-light mb-2">
                   Bağlıca
                 </h3>
-                <p className="text-silver/60 text-sm">Ankara</p>
-                <p className="text-bronze text-xs tracking-[0.2em] uppercase mt-4">
-                  Haritada aç
-                </p>
+                <p className="text-silver/60 text-sm">Proje lokasyonu · Ankara</p>
               </div>
             </div>
 
@@ -92,7 +86,7 @@ export function LocationSection() {
                 />
               ))}
             </div>
-          </motion.a>
+          </motion.div>
         </div>
       </div>
     </section>

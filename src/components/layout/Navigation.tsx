@@ -212,6 +212,9 @@ export function Footer() {
               İletişim
             </h4>
             <div className="space-y-3 text-silver/60 text-sm">
+              <p className="text-bronze text-[10px] tracking-[0.18em] uppercase">
+                {siteConfig.addressLabel}
+              </p>
               <a
                 href={siteConfig.mapUrl}
                 target="_blank"
