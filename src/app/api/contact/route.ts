@@ -9,16 +9,33 @@ type ContactPayload = {
   message?: string;
 };
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
-function buildBody(input: {
+type ContactInput = {
   name: string;
   phone: string;
   email: string;
   message: string;
-}) {
+};
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function formatDate() {
+  return new Date().toLocaleString("tr-TR", {
+    timeZone: "Europe/Istanbul",
+  });
+}
+
+function buildTextBody(input: ContactInput) {
   return [
     `${siteConfig.name} web sitesinden yeni bilgi talebi`,
     "",
@@ -27,16 +44,88 @@ function buildBody(input: {
     `E-posta  : ${input.email}`,
     `Mesaj    : ${input.message || "(boş)"}`,
     "",
-    `Tarih    : ${new Date().toLocaleString("tr-TR", {
-      timeZone: "Europe/Istanbul",
-    })}`,
+    `Tarih    : ${formatDate()}`,
   ].join("\n");
+}
+
+function buildHtmlBody(input: ContactInput) {
+  const rows = [
+    ["Ad Soyad", input.name],
+    ["Telefon", input.phone],
+    ["E-posta", input.email],
+    ["Mesaj", input.message || "(boş)"],
+    ["Tarih", formatDate()],
+  ]
+    .map(
+      ([label, value], index) => `
+      <tr>
+        <td style="padding:14px 0;border-top:${index === 0 ? "none" : "1px solid #ece8e1"};vertical-align:top;width:120px;">
+          <p style="margin:0;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#8a8174;font-family:Georgia,'Times New Roman',serif;">
+            ${escapeHtml(label)}
+          </p>
+        </td>
+        <td style="padding:14px 0;border-top:${index === 0 ? "none" : "1px solid #ece8e1"};vertical-align:top;">
+          <p style="margin:0;font-size:16px;line-height:1.5;color:#1c1916;font-family:Arial,Helvetica,sans-serif;white-space:pre-wrap;">
+            ${
+              label === "E-posta"
+                ? `<a href="mailto:${escapeHtml(value)}" style="color:#1c1916;text-decoration:underline;">${escapeHtml(value)}</a>`
+                : label === "Telefon"
+                  ? `<a href="tel:${escapeHtml(value.replace(/\s/g, ""))}" style="color:#1c1916;text-decoration:none;">${escapeHtml(value)}</a>`
+                  : escapeHtml(value)
+            }
+          </p>
+        </td>
+      </tr>`
+    )
+    .join("");
+
+  return `<!DOCTYPE html>
+<html lang="tr">
+  <body style="margin:0;padding:0;background:#f4f1ea;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f1ea;padding:32px 16px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border:1px solid #e4ddd2;">
+            <tr>
+              <td style="padding:28px 32px 20px;border-bottom:3px solid #C5A059;">
+                <p style="margin:0 0 6px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#C5A059;font-family:Arial,Helvetica,sans-serif;">
+                  ARY Grup
+                </p>
+                <h1 style="margin:0;font-size:28px;line-height:1.2;color:#1c1916;font-weight:normal;font-family:Georgia,'Times New Roman',serif;">
+                  ${escapeHtml(siteConfig.name)}
+                </h1>
+                <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:#6b645a;font-family:Arial,Helvetica,sans-serif;">
+                  Web sitesinden yeni bilgi talebi
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:8px 32px 28px;">
+                <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
+                  ${rows}
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:18px 32px;background:#1c1916;">
+                <p style="margin:0;font-size:12px;line-height:1.5;color:#d7d0c4;font-family:Arial,Helvetica,sans-serif;">
+                  Yanıtlamak için doğrudan Reply ile gönderene dönüş yapabilirsiniz.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>`;
 }
 
 async function sendWithSmtp(params: {
   to: string;
   subject: string;
   text: string;
+  html: string;
   replyTo: string;
 }) {
   const host = process.env.SMTP_HOST?.trim();
@@ -59,6 +148,7 @@ async function sendWithSmtp(params: {
     replyTo: params.replyTo,
     subject: params.subject,
     text: params.text,
+    html: params.html,
   });
 
   return { sent: true as const };
@@ -68,6 +158,7 @@ async function sendWithResend(params: {
   to: string;
   subject: string;
   text: string;
+  html: string;
   replyTo: string;
 }) {
   const key = process.env.RESEND_API_KEY?.trim();
@@ -89,6 +180,7 @@ async function sendWithResend(params: {
       reply_to: params.replyTo,
       subject: params.subject,
       text: params.text,
+      html: params.html,
     }),
   });
 
@@ -129,12 +221,15 @@ export async function POST(request: Request) {
       "serhatsoyyigit@arygrup.com.tr";
 
     const subject = `${siteConfig.name} — Yeni bilgi talebi (${name})`;
-    const text = buildBody({ name, phone, email, message });
+    const payload = { name, phone, email, message };
+    const text = buildTextBody(payload);
+    const html = buildHtmlBody(payload);
 
     const smtp = await sendWithSmtp({
       to,
       subject,
       text,
+      html,
       replyTo: email,
     });
     if (smtp.sent) return NextResponse.json({ ok: true });
@@ -143,6 +238,7 @@ export async function POST(request: Request) {
       to,
       subject,
       text,
+      html,
       replyTo: email,
     });
     if (resend.sent) return NextResponse.json({ ok: true });
