@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { navLinks, siteConfig } from "@/lib/data";
+import { legalLinks, navLinks, siteConfig } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { Logo, PhoneIcon } from "@/components/ui/Icons";
 
@@ -20,7 +20,7 @@ export function Navigation() {
   }, []);
 
   useEffect(() => {
-    const sections = navLinks.map((l) => l.href.replace("#", ""));
+    const sections = navLinks.map((l) => l.href.replace(/^\/?#/, ""));
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -62,13 +62,13 @@ export function Navigation() {
       >
         <div className="mx-auto max-w-[1600px] px-5 sm:px-6 lg:px-8 xl:px-10">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-3 lg:gap-5 xl:gap-8">
-            <Link href="#anasayfa" className="flex-shrink-0">
+            <Link href="/#anasayfa" className="flex-shrink-0">
               <Logo compact />
             </Link>
 
             <nav className="hidden lg:flex items-center justify-center flex-nowrap gap-[clamp(0.65rem,1.1vw,1.35rem)] min-w-0 overflow-hidden">
               {navLinks.map((link) => {
-                const sectionId = link.href.replace("#", "");
+                const sectionId = link.href.replace(/^\/?#/, "");
                 const isActive = activeSection === sectionId;
                 return (
                   <Link
@@ -234,9 +234,20 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.company}. Tüm hakları
             saklıdır.
           </p>
-          <p className="text-silver/40 text-xs tracking-wider">
-            {siteConfig.name} — {siteConfig.slogan}
-          </p>
+          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            {legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-silver/40 hover:text-bronze text-xs transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <span className="text-silver/40 text-xs tracking-wider">
+              {siteConfig.name} — {siteConfig.slogan}
+            </span>
+          </nav>
         </div>
       </div>
     </footer>

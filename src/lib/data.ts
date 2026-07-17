@@ -21,15 +21,19 @@ export const siteConfig = {
 };
 
 export const navLinks = [
-  { href: "#anasayfa", label: "Anasayfa" },
-  { href: "#proje", label: "Proje" },
-  { href: "#dis-gorunumler", label: "Dış Görünümler" },
-  { href: "#daireler", label: "Daireler" },
-  { href: "#sosyal-yasam", label: "Sosyal Yaşam" },
-  { href: "#lokasyon", label: "Lokasyon" },
-  { href: "#odeme-plani", label: "Ödeme Planı" },
-  { href: "#kurumsal", label: "Kurumsal" },
-  { href: "#iletisim", label: "İletişim" },
+  { href: "/#anasayfa", label: "Anasayfa" },
+  { href: "/#proje", label: "Proje" },
+  { href: "/#dis-gorunumler", label: "Dış Görünümler" },
+  { href: "/#daireler", label: "Daireler" },
+  { href: "/#sosyal-yasam", label: "Sosyal Yaşam" },
+  { href: "/#lokasyon", label: "Lokasyon" },
+  { href: "/#odeme-plani", label: "Ödeme Planı" },
+  { href: "/#kurumsal", label: "Kurumsal" },
+  { href: "/#iletisim", label: "İletişim" },
+];
+
+export const legalLinks = [
+  { href: "/kvkk", label: "KVKK Aydınlatma Metni" },
 ];
 
 export const heroSlides = [

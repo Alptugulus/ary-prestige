@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { siteConfig } from "@/lib/data";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Button } from "@/components/ui/Button";
@@ -188,6 +189,17 @@ export function ContactSection() {
                 WhatsApp
               </a>
             </div>
+
+            <p className="pt-2 text-[11px] leading-relaxed text-silver/40">
+              Formu göndererek{" "}
+              <Link
+                href="/kvkk"
+                className="text-silver/60 underline underline-offset-2 transition-colors hover:text-bronze"
+              >
+                KVKK Aydınlatma Metni
+              </Link>
+              &apos;ni okuduğunuzu kabul etmiş olursunuz.
+            </p>
           </motion.form>
 
           <motion.div
