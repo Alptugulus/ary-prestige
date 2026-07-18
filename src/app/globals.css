@@ -7,6 +7,12 @@
     scroll-behavior: smooth;
   }
 
+  /* Yana giriş animasyonları (x offset) sayfayı taşırıp yatay scroll oluşturmasın */
+  html,
+  body {
+    overflow-x: clip;
+  }
+
   body {
     @apply bg-background text-white antialiased font-sans;
   }

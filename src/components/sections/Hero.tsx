@@ -45,7 +45,7 @@ export function Hero() {
       <section
         ref={sectionRef}
         id="anasayfa"
-        className="relative h-screen min-h-[720px] overflow-hidden"
+        className="relative flex flex-col min-h-[100svh] md:min-h-screen overflow-hidden"
       >
         <HeroScene
           slides={heroSlides}
@@ -56,7 +56,7 @@ export function Hero() {
 
         <motion.div
           style={{ opacity: contentOpacity, y: contentY }}
-          className="absolute inset-0 flex items-center pt-28 pb-52 md:pb-56 will-change-transform z-10"
+          className="relative flex-1 flex items-center pt-28 md:pt-32 pb-8 md:pb-10 will-change-transform z-10"
         >
           <div className="container mx-auto px-6 lg:px-10">
             <div className="max-w-xl lg:max-w-2xl">
@@ -178,18 +178,9 @@ export function Hero() {
           ))}
         </motion.div>
 
-        {/* Pusula */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="absolute bottom-[9.5rem] md:bottom-44 right-5 md:right-10 hidden lg:block opacity-50"
-        >
-          <CompassIcon />
-        </motion.div>
-
-        {/* Scroll + slayt önizlemeleri */}
-        <div className="absolute bottom-[9.5rem] md:bottom-44 left-6 md:left-10 flex items-end gap-5 md:gap-8 z-10">
+        {/* Scroll + slayt önizlemeleri + pusula — normal akışta, içerikle çakışmaz */}
+        <div className="relative z-10 container mx-auto px-6 lg:px-10 flex items-end justify-between gap-5 md:gap-8 pb-5 md:pb-6">
+          <div className="flex items-end gap-5 md:gap-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -244,6 +235,17 @@ export function Hero() {
               </button>
             ))}
           </motion.div>
+          </div>
+
+          {/* Pusula */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="hidden lg:block opacity-50"
+          >
+            <CompassIcon />
+          </motion.div>
         </div>
 
         {/* Özellik barı — ikon üstte, metin altta */}
@@ -251,7 +253,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.8 }}
-          className="absolute bottom-0 left-0 right-0 z-10"
+          className="relative z-10"
         >
           <div className="bg-black/60 backdrop-blur-md border-t border-white/5">
             <div className="container mx-auto px-4 md:px-6 lg:px-10">
