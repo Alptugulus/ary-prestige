@@ -68,8 +68,8 @@ function InteriorGallery() {
             İç Mekân Yaşamı
           </h3>
           <p className="text-silver/60 text-sm max-w-xl mx-auto">
-            {siteConfig.name} dairelerinin salon, mutfak, banyo ve antre
-            detaylarını keşfedin.
+            {siteConfig.name} dairelerinin salon, mutfak, yatak odası, banyo,
+            antre ve balkon detaylarını keşfedin.
           </p>
         </div>
 
@@ -146,14 +146,15 @@ function InteriorGallery() {
             </button>
           </div>
 
-          <div className="lg:col-span-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-2.5 md:gap-3 content-start max-h-[28rem] overflow-y-auto custom-scrollbar pr-1">
+          <div className="lg:col-span-4 flex flex-wrap content-start gap-2.5 md:gap-3 max-h-[28rem] overflow-y-auto custom-scrollbar pr-1">
             {filtered.map((view, index) => (
               <button
                 key={view.id}
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 className={cn(
-                  "relative aspect-[16/10] overflow-hidden border transition-all",
+                  "relative block aspect-[16/10] overflow-hidden border transition-all",
+                  "w-[calc(50%-0.3125rem)] sm:w-[calc(33.333%-0.417rem)] lg:w-[calc(50%-0.375rem)]",
                   activeIndex === index
                     ? "border-bronze ring-1 ring-bronze/40 opacity-100"
                     : "border-white/10 opacity-55 hover:opacity-100"
