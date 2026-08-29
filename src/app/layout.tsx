@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat, Playfair_Display } from "next/font/google";
 import { Navigation, Footer } from "@/components/layout/Navigation";
 import { ExploreShell } from "@/components/providers/ExploreShell";
+import { MetaPixel } from "@/components/analytics/MetaPixel";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { seoKeywords, siteConfig } from "@/lib/data";
 import "./globals.css";
@@ -77,6 +78,7 @@ export default function RootLayout({
         <JsonLd />
       </head>
       <body className="font-sans">
+        <MetaPixel />
         <ExploreShell>
           <Navigation />
           <main>{children}</main>
