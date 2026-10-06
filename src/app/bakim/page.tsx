@@ -42,29 +42,6 @@ export default function MaintenancePage() {
           buradayız.
         </p>
 
-        <div className="mt-10 h-px w-16 bg-bronze/50" />
-
-        <div className="mt-10 space-y-2 text-sm text-silver/60">
-          <p>
-            <a
-              href={`tel:${siteConfig.phoneRaw}`}
-              className="text-bronze transition-colors hover:text-bronze/80"
-            >
-              {siteConfig.phone}
-            </a>
-          </p>
-          <p>
-            <a
-              href={`mailto:${siteConfig.email}`}
-              className="transition-colors hover:text-bronze"
-            >
-              {siteConfig.email}
-            </a>
-          </p>
-          <p className="pt-2 text-xs tracking-wide text-silver/40">
-            {siteConfig.company}
-          </p>
-        </div>
       </div>
     </div>
   );
